@@ -24,6 +24,10 @@ public class FadeAndLoadScene : MonoBehaviour
         StartCoroutine(Fade(scene));
     }
 
+    public void ExitGame(){
+        Application.Quit();
+    }
+
     IEnumerator Fade(string scene){
         float t = 0;
         while(t < 1){
