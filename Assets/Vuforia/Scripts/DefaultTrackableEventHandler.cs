@@ -7,6 +7,7 @@ Confidential and Proprietary - Protected under copyright and other laws.
 ==============================================================================*/
 
 using UnityEngine;
+using UnityEngine.Events;
 using Vuforia;
 
 /// <summary>
@@ -22,6 +23,12 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
     protected TrackableBehaviour mTrackableBehaviour;
     protected TrackableBehaviour.Status m_PreviousStatus;
     protected TrackableBehaviour.Status m_NewStatus;
+
+    public float DelayActionFound;
+    public float DelayActionLost;
+    public UnityEvent OnTrackingFoundEvent= new UnityEvent();
+    public UnityEvent OnTrackingLostEvent= new UnityEvent();
+
 
     #endregion // PROTECTED_MEMBER_VARIABLES
 
@@ -80,9 +87,13 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
     #endregion // PUBLIC_METHODS
 
     #region PROTECTED_METHODS
+    private void EventFound(){
+        OnTrackingFoundEvent.Invoke();
+    }
 
     protected virtual void OnTrackingFound()
     {
+        Invoke("EventFound", DelayActionFound);
         var rendererComponents = GetComponentsInChildren<Renderer>(true);
         var colliderComponents = GetComponentsInChildren<Collider>(true);
         var canvasComponents = GetComponentsInChildren<Canvas>(true);
@@ -100,9 +111,13 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
             component.enabled = true;
     }
 
+    private void EventLost(){
+        OnTrackingLostEvent.Invoke();
+    }
 
     protected virtual void OnTrackingLost()
     {
+        Invoke("EventLost", DelayActionLost);
         var rendererComponents = GetComponentsInChildren<Renderer>(true);
         var colliderComponents = GetComponentsInChildren<Collider>(true);
         var canvasComponents = GetComponentsInChildren<Canvas>(true);
