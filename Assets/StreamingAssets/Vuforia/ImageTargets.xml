@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
-    <ImageTarget name="pato2" size="1.000000 0.571250" />
-    <ImageTarget name="pato" size="1.000000 0.571250" />
+    <ImageTarget name="gato-track" size="1.000000 0.735924" />
+    <ImageTarget name="pato-track" size="1.000000 0.761310" />
   </Tracking>
 </QCARConfig>
